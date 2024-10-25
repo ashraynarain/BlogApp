@@ -1,18 +1,23 @@
-export default function Post(){
+import {format, formatISO9075} from "date-fns";
+import { Link } from "react-router-dom";
+export default function Post({_id,title,summary,cover,content,createdAt,author}){
     return (
         <div className="post">
         <div className="image">
-        <img src="https://techcrunch.com/wp-content/uploads/2024/08/in-brief-ai-v2.jpg?resize=680,383" alt =""></img>
+          <Link to={`/post/${_id}`}>
+            <img src={'http://localhost:4000/'+cover} alt =""></img>
+          </Link>
         </div>
         <div className="texts">
-          <h2>DeepMind workers sign letter in protest of Google's defense contracts</h2>
+        <Link to={`/post/${_id}`}>
+          <h2>{title}</h2>
+        </Link>
           <p className="info">
-            <a className="author">Ashray Narain</a>
-            <time>2023-01-06 16:45</time>
+            <a className="author">{author.username}</a>
+            <time>{formatISO9075(new Date(createdAt))}</time>
           </p>
-          <p className="summary">At least 200 workers at DeepMind, Google’s AI R&D division, are displeased with Google’s reported defense contracts — and according to Time, they circulated a letter internally back in May to say as much.</p>
-        </div>
-        
+          <p className="summary">{summary}</p>
+        </div> 
       </div>
     );
 }
